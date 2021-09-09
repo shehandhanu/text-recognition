@@ -2,37 +2,98 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.btn1 {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #c8161d;
   color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+.btn2 {
+  background-color: #c8161d;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  left: 48%;
+  border-radius: 5px;
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.warpper {
+  position: relative;
+}
+
+.frame {
+  height: 40vw;
+  width: 100vw;
+}
+
+.sampleimg {
+  position: absolute;
+}
+
+.textitem {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.274);
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 15px;
+}
+
+.textitem:hover {
+  background-color: #9c9c9c;
+}
+.uploadimg {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.container-left {
+  float: left;
+  width: 60%;
+  height: 1000px;
+}
+
+.container-right {
+  position: sticky;
+  float: left;
+  width: 40%;
+  height: 600px;
+  right: 0;
+  background-color: #383834;
+}
+
+.container {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.textitem-container {
+  position: absolute;
+  width: 100%;
+}
+
+.textfeild {
+  height: 100%;
+  width: 100%;
+  font-size: 25px;
 }
