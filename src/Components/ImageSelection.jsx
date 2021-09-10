@@ -4,9 +4,11 @@ import React from "react";
 import TextItem from "./TextItem";
 import axios from "axios";
 import S3FileUpload from "react-s3";
+import aws from "aws-sdk";
 
 function ImageSelection(props) {
   const inputRef = React.useRef();
+  const imageRef = React.useRef();
   const [SelectedImg, setSelectedImg] = React.useState();
   const [Response, setResponse] = React.useState();
   const [Type, setType] = React.useState(false);
@@ -14,11 +16,7 @@ function ImageSelection(props) {
 
   React.useEffect(() => {}, [selectedText]);
 
-  let windowWidth = window.innerWidth;
-  let windowHeight = window.innerHeight;
-
   const onSubmit = async () => {
-    console.log("okokokoko");
     const config = {
       bucketName: "handwrittenimagesbucket",
       dirName:
@@ -38,10 +36,32 @@ function ImageSelection(props) {
       });
   };
 
+  const setImageRealSize = (height, width) => {
+    console.log(height, width);
+  };
+
+  let windowWidth = window.innerWidth;
+  let windowHeight = window.innerHeight;
+
   const getProcessedData = async () => {
     let resKey = SelectedImg.name;
     resKey = resKey.split(".");
     const key = resKey[0];
+
+    aws.config.update({
+      region: "us-east-1",
+      accessKeyId: "AKIAXTEHORJDUQ3CNBUV",
+      secretAccessKey: "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",
+    });
+
+    const s3 = new aws.S3();
+
+    const response = await s3.listObjectsV2({
+      bucketName: "handwrittenresponss3",
+    });
+
+    console.log(response);
+
     console.log(
       "urlkey jksbcdjkasbdajskbcjcnbjakscbasjcbsahbahb" + key + ".json"
     );
@@ -7232,6 +7252,13 @@ function ImageSelection(props) {
                           className="sampleimg"
                           src={URL.createObjectURL(SelectedImg)}
                           alt="img"
+                          ref={imageRef}
+                          onLoad={() =>
+                            setImageRealSize(
+                              imageRef.current.naturalHeight,
+                              imageRef.current.naturalWidth
+                            )
+                          }
                         />
                         <label className="btn2" onClick={onSubmit}>
                           Upload Image
