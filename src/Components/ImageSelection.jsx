@@ -21,34 +21,33 @@ function ImageSelection(props) {
     console.log("okokokoko");
     const config = {
       bucketName: "handwrittenimagesbucket",
-      // dirName: "https://522122594887.signin.aws.amazon.com/console",
+      dirName:
+        "s3://arn:aws:s3:us-east-1:522122594887:accesspoint/mys3accesspoint",
       region: "us-east-1",
       accessKeyId: "AKIAXTEHORJDUQ3CNBUV",
       secretAccessKey: "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",
     };
 
     await S3FileUpload.uploadFile(SelectedImg, config)
-      .then((res) => {
-        console.log(res);
+      .then(async (res) => {
+        // setResponse();
+        await getProcessedData();
       })
       .catch((err) => {
         alert(err);
       });
+  };
 
-    // console.log(res.result);
-    // setResponse(res);
-
-    // const formData = new FormData();
-    // formData.append("file", SelectedImg);
-    // formData.append("upload_preset", "afproject");
-
-    // let response = await axios.post(
-    //   "https://api.cloudinary.com/v1_1/dxz8wbaqv/image/upload",
-    //   formData
-    // );
-
-    // setResponse(response);
-    // alert("Image Uploaded");
+  const getProcessedData = async () => {
+    let resKey = SelectedImg.name;
+    resKey = resKey.split(".");
+    const key = resKey[0];
+    console.log(
+      "urlkey jksbcdjkasbdajskbcjcnbjakscbasjcbsahbahb" + key + ".json"
+    );
+    // const fetchedData = await axios.get(`url ${key}`);
+    //After It Set To Response
+    setResponse(/*sample*/);
   };
 
   const imagesize = {
@@ -7225,14 +7224,6 @@ function ImageSelection(props) {
                   <div>
                     {!SelectedImg ? null : (
                       <div>
-                        {/* <div style={{ position: "relative" }}>
-                          <input
-                            checked={Type}
-                            onChange={() => setType(!Type)}
-                            type="checkbox"
-                          />
-                          show line by line
-                        </div> */}
                         <img
                           style={{
                             width: imagesize.width + "px",
@@ -7242,9 +7233,6 @@ function ImageSelection(props) {
                           src={URL.createObjectURL(SelectedImg)}
                           alt="img"
                         />
-                        {/* {process().map((item, index) => {
-                          return item;
-                        })} */}
                         <label className="btn2" onClick={onSubmit}>
                           Upload Image
                         </label>
