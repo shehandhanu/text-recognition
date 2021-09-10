@@ -32,6 +32,10 @@
   text-align: center;
 }
 
+.visible50 {
+  background-color: #c8161c2d;
+}
+
 .warpper {
   position: relative;
 }
