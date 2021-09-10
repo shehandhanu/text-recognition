@@ -4,7 +4,6 @@ import React from "react";
 import TextItem from "./TextItem";
 import axios from "axios";
 import S3FileUpload from "react-s3";
-import aws from "aws-sdk";
 
 function ImageSelection(props) {
   const inputRef = React.useRef();
@@ -13,14 +12,17 @@ function ImageSelection(props) {
   const [Response, setResponse] = React.useState();
   const [Type, setType] = React.useState(false);
   const [selectedText, setselectedText] = React.useState([]);
+  const [realHeight, setrealHeight] = React.useState();
+  const [realWidth, setrealWidth] = React.useState();
+
+  let windowWidth = window.innerWidth;
+  const ratio = (windowWidth * 53.3) / 100 / realWidth;
 
   React.useEffect(() => {}, [selectedText]);
 
   const onSubmit = async () => {
     const config = {
       bucketName: "handwrittenimagesbucket",
-      dirName:
-        "s3://arn:aws:s3:us-east-1:522122594887:accesspoint/mys3accesspoint",
       region: "us-east-1",
       accessKeyId: "AKIAXTEHORJDUQ3CNBUV",
       secretAccessKey: "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",
@@ -28,7 +30,6 @@ function ImageSelection(props) {
 
     await S3FileUpload.uploadFile(SelectedImg, config)
       .then(async (res) => {
-        // setResponse();
         await getProcessedData();
       })
       .catch((err) => {
@@ -37,42 +38,25 @@ function ImageSelection(props) {
   };
 
   const setImageRealSize = (height, width) => {
-    console.log(height, width);
+    setrealHeight(height);
+    setrealWidth(width);
   };
-
-  let windowWidth = window.innerWidth;
-  let windowHeight = window.innerHeight;
 
   const getProcessedData = async () => {
     let resKey = SelectedImg.name;
     resKey = resKey.split(".");
     const key = resKey[0];
 
-    aws.config.update({
-      region: "us-east-1",
-      accessKeyId: "AKIAXTEHORJDUQ3CNBUV",
-      secretAccessKey: "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",
-    });
-
-    const s3 = new aws.S3();
-
-    const response = await s3.listObjectsV2({
-      bucketName: "handwrittenresponss3",
-    });
-
-    console.log(response);
-
-    console.log(
-      "urlkey jksbcdjkasbdajskbcjcnbjakscbasjcbsahbahb" + key + ".json"
+    const response = await axios.get(
+      `https://handwrittenresponss3.s3.amazonaws.com/${key}.json`
     );
-    // const fetchedData = await axios.get(`url ${key}`);
-    //After It Set To Response
-    setResponse(/*sample*/);
+
+    setResponse(response);
   };
 
   const imagesize = {
     width: (windowWidth * 53.3) / 100,
-    height: 1000,
+    height: ratio * realHeight,
   };
 
   const data = {
@@ -7172,9 +7156,6 @@ function ImageSelection(props) {
           const text = item.Text;
           const polygons = item.Geometry.Polygon;
           const leftTop = polygons[0];
-          // const rightTop = polygons[1];
-          // const rightbottom = polygons[2];
-          // const leftbottom = polygons[3];
           const posisionedItems = getPosisionedItems(leftTop, text);
           textItemArray.push(posisionedItems);
         }
@@ -7183,9 +7164,6 @@ function ImageSelection(props) {
           const text = item.Text;
           const polygons = item.Geometry.Polygon;
           const leftTop = polygons[0];
-          // const rightTop = polygons[1];
-          // const rightbottom = polygons[2];
-          // const leftbottom = polygons[3];
           const posisionedItems = getPosisionedItems(leftTop, text);
           textItemArray.push(posisionedItems);
         }

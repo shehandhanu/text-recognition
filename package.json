@@ -7,7 +7,6 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "aws-sdk": "^2.986.0",
     "axios": "^0.21.3",
     "json-formatter-js": "^2.3.4",
     "json-pretty-html": "^1.1.6",
