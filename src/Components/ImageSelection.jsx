@@ -37,21 +37,24 @@ function ImageSelection(props) {
       });
   };
 
-  const setImageRealSize = (height, width) => {
-    setrealHeight(height);
-    setrealWidth(width);
-  };
-
   const getProcessedData = async () => {
     let resKey = SelectedImg.name;
     resKey = resKey.split(".");
     const key = resKey[0];
 
-    const response = await axios.get(
-      `https://handwrittenresponss3.s3.amazonaws.com/${key}.json`
-    );
+    setTimeout(async () => {
+      const response = await axios.get(
+        `https://handwrittenresponss3.s3.amazonaws.com/${key}.json`
+      );
 
-    setResponse(response);
+      setResponse(response);
+      alert("Image Uploaded Successfully");
+    }, 5000);
+  };
+
+  const setImageRealSize = (height, width) => {
+    setrealHeight(height);
+    setrealWidth(width);
   };
 
   const imagesize = {
@@ -7150,7 +7153,7 @@ function ImageSelection(props) {
 
   function process() {
     const textItemArray = [];
-    data.Blocks.map((item, index) => {
+    Response.data.Blocks.map((item, index) => {
       if (Type == true) {
         if (item.BlockType === "LINE") {
           const text = item.Text;
@@ -7185,6 +7188,8 @@ function ImageSelection(props) {
       />
     );
   }
+
+  console.log(Response);
 
   return (
     <div>
