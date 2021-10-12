@@ -2,16 +2,43 @@
   text-align: center;
 }
 
+.Header {
+  box-shadow: 1px 1px #e7e7e7;
+}
+
+.headerText {
+  align-items: center;
+  align-self: center;
+  margin: 0 auto;
+}
+
+.h1 {
+  font-family: Didot, "Didot LT STD", "Helvetica Neue", Helvetica, Arial;
+  font-size: 30px;
+  margin: 12px;
+  margin-top: 14px;
+}
+
+.selectIMGFirstScreen {
+  border: rgba(148, 148, 148, 0.644) dashed;
+  background-color: #ebebeb;
+  position: absolute;
+  width: 96%;
+  height: 38vw;
+  margin: 2%;
+  margin-top: 10px;
+}
+
 .btn1 {
   position: absolute;
-  top: 60%;
+  top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  background-color: #c8161d;
+  background-color: #1480a4;
   color: white;
   font-size: 16px;
-  padding: 12px 24px;
+  padding: 5px 180px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
@@ -19,15 +46,15 @@
 }
 
 .btn2 {
-  background-color: #c8161d;
+  background-color: #1480a4;
   color: white;
   font-size: 16px;
   padding: 12px 24px;
   border: none;
   cursor: pointer;
   position: absolute;
-  top: 20px;
-  left: 48%;
+  top: 10px;
+  right: 10px;
   border-radius: 5px;
   text-align: center;
 }
@@ -49,6 +76,10 @@
   position: absolute;
 }
 
+.UploadedImageScroll {
+  position: relative;
+}
+
 .textitem {
   position: absolute;
   background-color: rgba(0, 0, 0, 0.274);
@@ -62,10 +93,15 @@
 
 .textitem:hover {
   background-color: #030303;
+  transition: 500ms;
+  padding-bottom: 6px;
+  cursor: pointer;
 }
 .uploadimg {
   position: absolute;
-  top: 40%;
+  width: 200px;
+  opacity: 0.5;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -74,21 +110,26 @@
 .container-left {
   float: left;
   width: 60%;
-  height: 1000px;
+  height: 38vw;
+  border: black solid;
+  overflow: auto;
 }
 
 .container-right {
+  padding: 10px;
+  padding-top: 30px;
   position: sticky;
   float: left;
   width: 40%;
-  height: 600px;
+  height: 38vw;
   right: 0;
-  background-color: #383834;
+  border: black solid;
 }
 
 .container {
+  margin-top: 10px;
   width: 90%;
-  margin-left: 5%;
+  height: 40vw;
 }
 
 .textitem-container {
@@ -100,4 +141,192 @@
   height: 100%;
   width: 100%;
   font-size: 25px;
+  border-color: Transparent;
+  border: none;
+  outline: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  margin-left: 5px;
+  margin-top: 0px;
+  color: #030303;
+  opacity: 1 !important;
+}
+
+.tooltip:hover {
+  background-color: #6fe4f3d5;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 170px;
+  background-color: rgba(37, 37, 37, 0.747);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.copybtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 15px;
+  cursor: pointer;
+  border-color: #1480a4;
+  color: #1480a4;
+}
+
+.copybtn2 {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 2px solid black;
+  color: black;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 15px;
+  cursor: pointer;
+  border-color: #1480a4;
+  background: #1480a4;
+  color: white;
+}
+
+.copybtn:hover {
+  background: #1480a4;
+  color: white;
+}
+
+.switch {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 250px;
+  height: 30px;
+  text-align: center;
+  background: #00bc9c;
+  transition: all 0.2s ease;
+  border-radius: 25px;
+}
+.switch span:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 4px;
+  height: 12px;
+  margin-top: -8px;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+input[type="radio"] {
+  display: none;
+}
+.switch label {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.2);
+  width: 150px;
+  line-height: 30px;
+  transition: all 0.2s ease;
+}
+label[for="yes"] {
+  position: absolute;
+  left: 0px;
+  height: 20px;
+}
+label[for="no"] {
+  position: absolute;
+  right: 0px;
+}
+#no:checked ~ .switch {
+  background: #eb4f37;
+}
+#no:checked ~ .switch span {
+  background: #fff;
+  margin-left: -8px;
+}
+#no:checked ~ .switch span:after {
+  background: #fff;
+  height: 20px;
+  margin-top: -8px;
+  margin-left: 8px;
+}
+#yes:checked ~ .switch label[for="yes"] {
+  color: #fff;
+}
+#no:checked ~ .switch label[for="no"] {
+  color: #fff;
 }
